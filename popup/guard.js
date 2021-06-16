@@ -82,9 +82,9 @@ function clipboardPassword(key){
     navigator.clipboard.writeText(map.get(key).password).then(function(){
         console.log(map.get(key).password);
         success(); 
-        document.getElementById('copyText').setAttribute("style", "display: block")
+        document.getElementById('copyText').setAttribute("style", "display: block; margin: 15px");
+        setTimeout(function(){document.getElementById('copyText').setAttribute("style", "display: none");}, 3000);
     }, onError);
-    // console.log("" + text +" | "+ map.get(key).password);
 }
 
 function showItem(obj){

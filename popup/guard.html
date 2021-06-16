@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html style="scrollbar-width: none;">
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="guard.css"/>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="fontawesome/css/all.css"/>
+        <script src="bootstrap/js/bootstrap.js"></script>
 
         <style>
             a {
@@ -37,12 +38,10 @@
     </head>
 
     <body class="p-3" style="overflow-x: hidden;">
-        <div id="copyText" class="alert alert-success" style="display: none;">Password Copied</div>
-        <img id="favi"></img>
-        <div id="url" value="test">test</div>
-        <div id="name" value="leong">leong</div>
-        <div id="username"value="abcde">abcde</div>
-        <div id="pass"value="123456789">123456789</div>
+        <div id="url" value="test" style="display: none;">test</div>
+        <div id="name" value="leong" style="display: none;">leong</div>
+        <div id="username"value="abcde" style="display: none;">abcde</div>
+        <div id="pass"value="123456789" style="display: none;">123456789</div>
         <div class="container position-relative" style="min-width: 500px; min-height: 550px; width: 100%">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
@@ -57,7 +56,7 @@
                 
             </div>
         </div>
+        <div id="copyText" class="alert alert-success fixed-bottom" style="display: none; margin: 15px;">Password Copied</div>
         <script src="guard.js"></script>
-        <script src="bootstrap/js/bootstrap.js"></script>
     </body>
 </html>
