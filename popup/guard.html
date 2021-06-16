@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="guard.css"/>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="fontawesome/css/all.css"/>
+
+        <style>
+            a {
+                color: inherit;
+            }
+
+            .input-icons i {
+                position: absolute;
+                margin-left: 10px;
+                align-self: center;
+            }
+              
+            .input-icons {
+                width: 100%;
+                display: flex;
+                margin-right: 10px;
+            }
+              
+            .icon {
+                padding: 10px;
+                min-width: 40px;
+            }
+              
+            .input-field {
+                width: 100%;
+                padding: 10px;
+                padding-left: 30px;
+            }
+        </style>
+    </head>
+
+    <body class="p-3" style="overflow-x: hidden;">
+        <div id="copyText" class="alert alert-success" style="display: none;">Password Copied</div>
+        <img id="favi"></img>
+        <div id="url" value="test">test</div>
+        <div id="name" value="leong">leong</div>
+        <div id="username"value="abcde">abcde</div>
+        <div id="pass"value="123456789">123456789</div>
+        <div class="container position-relative" style="min-width: 500px; min-height: 550px; width: 100%">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="input-icons">
+                        <i class="fas fa-search"></i>
+                        <input class="input-field" type="text" style="width: 100%;" placeholder="Find Link">
+                    </div>
+                    <button id="addbtn" type="button" class="btn btn-primary align-self-center">+</button>
+                </div>
+            </div>
+            <div id="guard_list" class="d-grid gap-3 p-3" >
+                
+            </div>
+        </div>
+        <script src="guard.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+    </body>
+</html>
