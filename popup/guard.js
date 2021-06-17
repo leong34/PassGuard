@@ -69,7 +69,7 @@ function del(key){
     map.delete(key);
     arr = [];
     map.forEach(element => {
-        arr.push(new Item(element.name, element.username, element.password, element.key));
+        arr.push(element);
     });
     browser.storage.local.clear().then(function(){browser.storage.local.set({items: arr});}, onError);
 }
@@ -143,4 +143,25 @@ function showItem(obj){
     let cpid = 'cp' + obj.key;
     document.getElementById(delid).addEventListener('click', function(){del(obj.key);});
     document.getElementById(cpid).addEventListener('click', function(){clipboardPassword(obj.key);});
+}
+
+
+let search = document.getElementById('search_field');
+search.addEventListener("input", onSearch);
+
+function onSearch(){
+    if(search.value === ""){
+        arr.forEach(element => {
+            document.getElementById(element.key).parentNode.setAttribute('style', 'display: block;');
+        });
+    }
+    else{
+        let searchArr = [];
+        arr.forEach(element => {
+            if(!(element.domain.includes(search.value) || element.name.includes(search.value) || element.username.includes(search.value))){
+                document.getElementById(element.key).parentNode.setAttribute('style', 'display: none;');
+            }
+        });
+        
+    }
 }
