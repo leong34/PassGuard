@@ -94,7 +94,7 @@ function showItem(obj){
     let domain = new URL(obj.domain).hostname;
 
     if(domain != ""){
-        child.innerHTML = ` <div id="${obj.key}" class="p-2 bg-light border">
+        child.innerHTML = ` <div id="${obj.key}" class="p-2 bg-light border form-control">
                             <div class="row">
                                 <div class="col-2 d-flex align-items-center justify-content-center">
                                     <img src="http://${domain}/favicon.ico" style="max-width: 35px; max-height: 35px;">
@@ -117,7 +117,7 @@ function showItem(obj){
                         </div>`;
     }
     else{
-        child.innerHTML = ` <div id="${obj.key}" class="p-2 bg-light border">
+        child.innerHTML = ` <div id="${obj.key}" class="p-2 bg-light border form-control">
                             <div class="row">
                                 <div class="col-2 d-flex align-items-center justify-content-center">
                                     <i class="fas fa-globe-americas" style="max-width: 35px; max-height: 35px;"></i>

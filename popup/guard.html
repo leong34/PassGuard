@@ -12,11 +12,11 @@
                 color: inherit;
             }
 
-            .fas {
+            .fas:not(.fa-globe-americas, .fa-search) {
                 color: rgb(133, 135, 136);
             }
 
-            .fas:hover {
+            .fas:not(.fa-globe-americas, .fa-search):hover {
                 color: rgb(43, 43, 43);
             }
 
@@ -45,7 +45,7 @@
         </style>
     </head>
 
-    <body class="p-3" style="overflow-x: hidden;">
+    <body class="p-3" style="overflow-x: hidden; background-color: #ebebeb;">
         <div id="url" value="test" style="display: none;">test</div>
         <div id="name" value="leong" style="display: none;">leong</div>
         <div id="username"value="abcde" style="display: none;">abcde</div>
@@ -55,7 +55,7 @@
                 <div class="col-12 d-flex justify-content-center">
                     <div class="input-icons">
                         <i class="fas fa-search"></i>
-                        <input id="search_field" class="input-field" type="text" style="width: 100%;" placeholder="Find with link, name, username">
+                        <input id="search_field" class="input-field form-control" type="text" style="width: 100%;" placeholder="Find with link, name, username">
                     </div>
                     <button id="addbtn" type="button" class="btn btn-primary align-self-center">+</button>
                 </div>
