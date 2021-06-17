@@ -21,6 +21,7 @@ browser.tabs.query({currentWindow: true, active: true}).then(function (tabs) {
     document.getElementById("addbtn").addEventListener("click", add);
 }, onError);
 
+
 readFromStore();
 
 function add(){
@@ -141,10 +142,13 @@ function showItem(obj){
     guardList.appendChild(child);
     let delid = 'delbtn' + obj.key;
     let cpid = 'cp' + obj.key;
-    document.getElementById(delid).addEventListener('click', function(){del(obj.key);});
+    document.getElementById(delid).addEventListener('click', function(){
+        var confirmation = confirm("Are you sure to delete this?");
+        if(confirmation)
+            del(obj.key);
+    });
     document.getElementById(cpid).addEventListener('click', function(){clipboardPassword(obj.key);});
 }
-
 
 let search = document.getElementById('search_field');
 search.addEventListener("input", onSearch);
