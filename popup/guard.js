@@ -17,23 +17,24 @@ browser.tabs.query({currentWindow: true, active: true}).then(function (tabs) {
     let domain = new URL(tab.url).hostname;
     let x = new URL(tab.url);
     
-    document.getElementById('url').innerHTML = tab.url;
-    document.getElementById("addbtn").addEventListener("click", add);
+    document.getElementById('url').value = tab.url;
 }, onError);
 
 
 readFromStore();
+// document.getElementById("addbtn").addEventListener("click", add);
+document.getElementById("submitBtn").addEventListener("click", add);
 
 function add(){
     arr.push(new Item(
-                document.getElementById('url').innerHTML,
-                document.getElementById('name').innerHTML, 
-                document.getElementById('username').innerHTML, 
-                document.getElementById('pass').innerHTML));
+                document.getElementById('url').value,
+                document.getElementById('label').value, 
+                document.getElementById('username').value, 
+                document.getElementById('password').value));
+                console.log(arr[arr.length - 1]);
     let lastIndex = arr.length - 1;
     map.set(arr[lastIndex].key, arr[lastIndex]);
-    showItem(arr[lastIndex]);
-    browser.storage.sync.set({items: arr}).then(success, onError);
+    browser.storage.local.set({items: arr}).then(success, onError);
 }
 
 function success(){
@@ -46,7 +47,7 @@ function onError(error){
 
 function readFromStore(){
     console.log("reading from store");
-    var itemList = browser.storage.sync.get('items').then(function(result){
+    var itemList = browser.storage.local.get('items').then(function(result){
         if(result.items === undefined){
             map.clear();
             return;
@@ -72,7 +73,7 @@ function del(key){
     map.forEach(element => {
         arr.push(element);
     });
-    browser.storage.sync.clear().then(function(){browser.storage.sync.set({items: arr});}, onError);
+    browser.storage.local.clear().then(function(){browser.storage.local.set({items: arr});}, onError);
 }
 
 function clipboardPassword(key){
