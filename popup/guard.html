@@ -42,6 +42,12 @@
                 padding: 10px;
                 padding-left: 30px;
             }
+
+            .guard_group:hover {
+                background-color: #f6f7f7 !important;
+                transition: ease;
+                cursor: pointer;
+            }
         </style>
     </head>
 
@@ -60,7 +66,8 @@
                 
             </div>
         </div>
-        <div id="copyText" class="alert alert-success fixed-bottom" style="display: none; margin: 15px;">Password Copied</div>
+        <div id="copyPassText" class="alert alert-success fixed-bottom" style="display: none; margin: 15px;">Password Copied</div>
+        <div id="copyUserText" class="alert alert-success fixed-bottom" style="display: none; margin: 15px;">Username Copied</div>
         <script src="guard.js"></script>
     </body>
 </html>
