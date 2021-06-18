@@ -33,7 +33,7 @@ function add(){
     let lastIndex = arr.length - 1;
     map.set(arr[lastIndex].key, arr[lastIndex]);
     showItem(arr[lastIndex]);
-    browser.storage.local.set({items: arr}).then(success, onError);
+    browser.storage.sync.set({items: arr}).then(success, onError);
 }
 
 function success(){
@@ -46,7 +46,7 @@ function onError(error){
 
 function readFromStore(){
     console.log("reading from store");
-    var itemList = browser.storage.local.get('items').then(function(result){
+    var itemList = browser.storage.sync.get('items').then(function(result){
         if(result.items === undefined){
             map.clear();
             return;
@@ -72,7 +72,7 @@ function del(key){
     map.forEach(element => {
         arr.push(element);
     });
-    browser.storage.local.clear().then(function(){browser.storage.local.set({items: arr});}, onError);
+    browser.storage.sync.clear().then(function(){browser.storage.sync.set({items: arr});}, onError);
 }
 
 function clipboardPassword(key){
