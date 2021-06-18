@@ -11,19 +11,24 @@ class Item{
 var arr = [];
 let map = new Map();
 let tab;
-
-browser.tabs.query({currentWindow: true, active: true}).then(function (tabs) {
-    tab = tabs[0];
-    let domain = new URL(tab.url).hostname;
-    let x = new URL(tab.url);
-    
-    document.getElementById('url').value = tab.url;
-}, onError);
-
+let search = document.getElementById('search_field');
 
 readFromStore();
-// document.getElementById("addbtn").addEventListener("click", add);
-document.getElementById("submitBtn").addEventListener("click", add);
+
+if(document.getElementById("submitBtn") !== null && document.getElementById('url') !== null){
+    document.getElementById("submitBtn").addEventListener("click", add);
+    browser.tabs.query({currentWindow: true, active: true}).then(function (tabs) {
+        tab = tabs[0];
+        let domain = new URL(tab.url).hostname;
+        let x = new URL(tab.url);
+        document.getElementById('url').value = tab.url;
+    }, onError);
+}
+
+if(search !== null){
+    search.addEventListener("input", onSearch);
+}
+
 
 function add(){
     arr.push(new Item(
@@ -150,9 +155,6 @@ function showItem(obj){
     });
     document.getElementById(cpid).addEventListener('click', function(){clipboardPassword(obj.key);});
 }
-
-let search = document.getElementById('search_field');
-search.addEventListener("input", onSearch);
 
 function onSearch(){
     if(search.value === ""){
