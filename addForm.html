@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html style="scrollbar-width: none;">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="guard.css"/>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="fontawesome/css/all.css"/>
+        <script src="bootstrap/js/bootstrap.js"></script>
+
+        <style>
+            a {
+                color: inherit;
+            }
+
+            .fas {
+                color: rgb(133, 135, 136);
+            }
+
+            .fas:hover {
+                color: rgb(43, 43, 43);
+            }
+
+            .input-icons i {
+                position: absolute;
+                margin-left: 10px;
+                align-self: center;
+            }
+              
+            .input-icons {
+                width: 100%;
+                display: flex;
+                margin-right: 10px;
+            }
+              
+            .icon {
+                padding: 10px;
+                min-width: 40px;
+            }
+              
+            .input-field {
+                width: 100%;
+                padding: 10px;
+                padding-left: 30px;
+            }
+
+            #url {
+                background-color: #fff;
+            }
+
+            .form-group {
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+
+    <body class="p-3" style="overflow-x: hidden; background-color: #ebebeb;">
+        <div class="container position-relative d-flex justify-content-center align-items-center" style="min-width: 480px; min-height: 550px; width: 100%">
+            <form action="guard.html" style="min-width: 400px;">
+                <div class="form-group">
+                    <label for="url">Active URL</label>
+                    <input type="text" text="HELLO WORLD" class="form-control" id="url" aria-describedby="url" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="label">Label</label>
+                  <input type="text" autocomplete="off" class="form-control" id="label" aria-describedby="label" placeholder="Enter label">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" autocomplete="off" class="form-control" id="username" aria-describedby="username" placeholder="Enter username">
+                  </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" autocomplete="off" class="form-control" id="password" placeholder="Password">
+                </div>
+                
+                <div class="row">
+                    <div class="col"><button id="cancel" type="cancel" class="btn btn-warning" style="margin-top: 20px;">Cancel</button></div>
+                    <div class="col d-flex justify-content-end"><button id="submitBtn" type="submit" class="btn btn-success" style="margin-top: 20px;">Submit</button></div>
+                </div>
+                <!-- <button id="submitBtn" type="submit" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
+                <button id="cancel" type="cancel" class="btn btn-primary" style="margin-top: 20px;">Cancel</button> -->
+            </form>
+        </div>
+        <script src="guard.js"></script>
+    </body>
+</html>
