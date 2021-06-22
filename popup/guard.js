@@ -267,6 +267,10 @@ function enterEditPage(obj){
                                         margin-right: 15px;
                                         right: 0;
                                     }
+
+                                    #password {
+                                        padding-right: 38px;
+                                    }
 								</style>
 							</head>
 							<body class="p-3" style="overflow-x: hidden; background-color: #ebebeb;">
