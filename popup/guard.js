@@ -39,22 +39,16 @@ function add(){
                 document.getElementById('label').value, 
                 document.getElementById('username').value, 
                 document.getElementById('password').value));
-                console.log(arr[arr.length - 1]);
     let lastIndex = arr.length - 1;
     map.set(arr[lastIndex].key, arr[lastIndex]);
-    browser.storage.sync.set({items: arr}).then(success, onError);
+    browser.storage.sync.set({items: arr});
 }
 
-function success(){
-    console.log("success");
-}
-
-function onError(error){
-    console.log(error);
+function onError(err){
+    console.log(err);
 }
 
 function readFromStore(){
-    console.log("reading from store");
     var itemList = browser.storage.sync.get('items').then(function(result){
         if(result.items === undefined){
             map.clear();
@@ -71,7 +65,6 @@ function readFromStore(){
 }
 
 function del(key){
-    console.log("delete" + key);
     document.getElementById(key).parentNode.remove();
     map.delete(key);
     arr = [];
@@ -87,8 +80,6 @@ function clipboardPassword(key){
     }
     
     navigator.clipboard.writeText(map.get(key).password).then(function(){
-        console.log(map.get(key).password);
-        success(); 
         document.getElementById('copyPassText').setAttribute("style", "display: block; margin: 15px");
         setTimeout(function(){document.getElementById('copyPassText').setAttribute("style", "display: none");}, 3000);
     }, onError);
@@ -100,8 +91,6 @@ function clipboardUsername(key){
     }
     
     navigator.clipboard.writeText(map.get(key).username).then(function(){
-        console.log(map.get(key).username);
-        success(); 
         document.getElementById('copyUserText').setAttribute("style", "display: block; margin: 15px");
         setTimeout(function(){document.getElementById('copyUserText').setAttribute("style", "display: none");}, 3000);
     }, onError);
@@ -303,7 +292,7 @@ function enterEditPage(obj){
 										</div>
 									</form>
 								</div>
-                                <div id="successText" class="alert alert-success fixed-bottom" style="display: none; margin: 15px;">Success Update</div>
+                                <div id="successText" class="alert alert-success fixed-bottom" style="display: none; margin: 15px;">Successfully Update</div>
 							</body>
 						</html>`;
 						
@@ -315,7 +304,6 @@ function enterEditPage(obj){
         document.getElementById("hide_pass").addEventListener("click", showHide);
         document.getElementById("updateBtn").addEventListener('click', function(){
             edit(obj.key);
-            console.log("UPDATED!!!!");
         });
     }, 1000);
 }
