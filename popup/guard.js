@@ -20,8 +20,7 @@ if(document.getElementById("submitBtn") !== null && document.getElementById('url
     browser.tabs.query({currentWindow: true, active: true}).then(function (tabs) {
         tab = tabs[0];
         let domain = new URL(tab.url).hostname;
-        let x = new URL(tab.url);
-        document.getElementById('url').value = tab.url;
+        document.getElementById('url').value = domain;
     }, onError);
 }
 
@@ -34,10 +33,15 @@ if(document.getElementById("hide_pass") !== null){
 }
 
 function add(){
+    if(document.getElementById('url').value.trim() === "" || document.getElementById('label').value.trim() === "" || document.getElementById('username').value.trim() === "" || document.getElementById('password').value === ""){
+        document.getElementById("alertMsg").setAttribute("style", "display: block; margin: 15px");
+        setTimeout(function(){document.getElementById('alertMsg').setAttribute("style", "display: none");}, 3000);
+        return;
+    }
     arr.push(new Item(
-                document.getElementById('url').value,
-                document.getElementById('label').value, 
-                document.getElementById('username').value, 
+                document.getElementById('url').value.trim(),
+                document.getElementById('label').value.trim(), 
+                document.getElementById('username').value.trim(), 
                 document.getElementById('password').value));
     let lastIndex = arr.length - 1;
     map.set(arr[lastIndex].key, arr[lastIndex]);
@@ -99,13 +103,12 @@ function clipboardUsername(key){
 function showItem(obj){
     let guardList = document.getElementById("guard_list");
     let child = document.createElement("div");
-    let domain = new URL(obj.domain).hostname;
 
-    if(domain != ""){
+    if(obj.domain != ""){
         child.innerHTML = ` <div id="${obj.key}" class="p-2 bg-light border form-control guard_group">
                             <div class="row">
                                 <div class="col-2 d-flex align-items-center justify-content-center">
-                                    <img src="http://${domain}/favicon.ico" style="max-width: 35px; max-height: 35px;">
+                                    <img src="http://${obj.domain}/favicon.ico" style="max-width: 35px; max-height: 35px;">
                                 </div>
                                 <div id="edit${obj.key}" class="col-6">
                                     <div class="row">
@@ -117,7 +120,7 @@ function showItem(obj){
                                 </div>
                                 <div class="col-4 d-flex align-items-center justify-content-end">
                                     <i title="Delete" id="delbtn${obj.key}" class="fas fa-trash p-2" value="${obj.key}"></i>
-                                    <a href="${obj.domain}"><i title="Open in New Tab" class="fas fa-external-link-alt p-2"></i></a>
+                                    <a href="http://${obj.domain}"><i title="Open in New Tab" class="fas fa-external-link-alt p-2"></i></a>
                                     <i title="Copy Username" class="fas fa-user p-2" id="cpUser${obj.key}"></i>
                                     <i title="Copy Password" id="cp${obj.key}" class="fas fa-copy p-2"></i>
                                 </div>
@@ -140,7 +143,7 @@ function showItem(obj){
                                 </div>
                                  <div class="col-4 d-flex align-items-center justify-content-end">
                                     <i title="Delete" id="delbtn${obj.key}" class="fas fa-trash p-2" value="${obj.key}"></i>
-                                    <a href="${obj.domain}"><i title="Open in New Tab" class="fas fa-external-link-alt p-2"></i></a>
+                                    <a href="http://${obj.domain}"><i title="Open in New Tab" class="fas fa-external-link-alt p-2"></i></a>
                                     <i title="Copy Username" class="fas fa-user p-2" id="cpUser${obj.key}"></i>
                                     <i title="Copy Password" id="cp${obj.key}" class="fas fa-copy p-2"></i>
                                 </div>
@@ -272,27 +275,28 @@ function enterEditPage(obj){
 										</div>
 										<div class="form-group">
 										  <label for="label">Label</label>
-										  <input type="text" autocomplete="off" value="${obj.name}" class="form-control" id="label" aria-describedby="label" placeholder="Enter label">
+										  <input type="text" autocomplete="off" value="${obj.name}" class="form-control" id="label" aria-describedby="label" placeholder="Enter label" required>
 										</div>
 										<div class="form-group">
 											<label for="username">Username</label>
-											<input type="text" autocomplete="off" value="${obj.username}" class="form-control" id="username" aria-describedby="username" placeholder="Enter username">
+											<input type="text" autocomplete="off" value="${obj.username}" class="form-control" id="username" aria-describedby="username" placeholder="Enter username" required>
 										  </div>
 										<div class="form-group">
 										  <label for="password">Password</label>
 										  <div class="input-icons">
-                                          <input type="password" autocomplete="off" value="${obj.password}" class="form-control" id="password" placeholder="Password">
+                                          <input type="password" autocomplete="off" value="${obj.password}" class="form-control" id="password" placeholder="Password" required>
                                             <i class="fas fa-eye-slash" id="hide_pass" title="Show Password"></i>
                                         </div>
 										</div>
 										
 										<div class="row">
-											<div class="col"><button id="cancel" type="cancel" class="btn btn-warning" style="margin-top: 20px;">CANCEL</button></div>
+											<div class="col"><button id="cancel" type="submit" class="btn btn-warning" style="margin-top: 20px;" formnovalidate>CANCEL</button></div>
 											<div class="col d-flex justify-content-end"><button id="updateBtn" type="button" class="btn btn-success" style="margin-top: 20px;" disabled>UPDATE</button></div>
 										</div>
 									</form>
 								</div>
                                 <div id="successText" class="alert alert-success fixed-bottom" style="display: none; margin: 15px;">Successfully Update</div>
+                                <div id="alertMsg" class="alert alert-danger fixed-bottom" style="display: none; margin: 15px;">Make Sure All Fields Are Filled</div>
 							</body>
 						</html>`;
 						
@@ -309,10 +313,15 @@ function enterEditPage(obj){
 }
 
 function edit(key){
+    if(document.getElementById('url').value.trim() === "" || document.getElementById('label').value.trim() === "" || document.getElementById('username').value.trim() === "" || document.getElementById('password').value === ""){
+        document.getElementById("alertMsg").setAttribute("style", "display: block; margin: 15px");
+        setTimeout(function(){document.getElementById('alertMsg').setAttribute("style", "display: none");}, 3000);
+        return;
+    }
 	var temp = new Item(
-                document.getElementById('url').value,
-                document.getElementById('label').value, 
-                document.getElementById('username').value, 
+                document.getElementById('url').value.trim(),
+                document.getElementById('label').value.trim(), 
+                document.getElementById('username').value.trim(), 
                 document.getElementById('password').value);
 				
 	map.set(key, temp);
