@@ -29,6 +29,10 @@ if(search !== null){
     search.addEventListener("input", onSearch);
 }
 
+if(document.getElementById("hide_pass") !== null){
+    document.getElementById("hide_pass").addEventListener("click", showHide);
+}
+
 function add(){
     arr.push(new Item(
                 document.getElementById('url').value,
@@ -116,10 +120,10 @@ function showItem(obj){
                                 </div>
                                 <div id="edit${obj.key}" class="col-6">
                                     <div class="row">
-                                        <div class="col">${obj.name}</div>
+                                        <div class="col detail">${obj.name}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col">${obj.username}</div>
+                                        <div class="col detail">${obj.username}</div>
                                     </div>
                                 </div>
                                 <div class="col-4 d-flex align-items-center justify-content-end">
@@ -137,12 +141,12 @@ function showItem(obj){
                                 <div class="col-2 d-flex align-items-center justify-content-center">
                                     <i class="fas fa-globe-americas" style="max-width: 35px; max-height: 35px;"></i>
                                 </div>
-                                <div id="edit${obj.key}" class="col-6">
+                                <div id="edit${obj.key}" class="col-6 detail">
                                     <div class="row">
-                                        <div class="col">${obj.name}</div>
+                                        <div class="col detail">${obj.name}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col">${obj.username}</div>
+                                        <div class="col detail">${obj.username}</div>
                                     </div>
                                 </div>
                                  <div class="col-4 d-flex align-items-center justify-content-end">
@@ -190,6 +194,21 @@ function onSearch(){
     }
 }
 
+function showHide(){
+    if(document.getElementById("password").type == "password"){
+        document.getElementById("password").type = "text";
+        document.getElementById("hide_pass").title = "Hide Password";
+        document.getElementById("hide_pass").classList.remove('fa-eye-slash');
+        document.getElementById("hide_pass").classList.add('fa-eye');
+    }
+    else{
+        document.getElementById("password").type = "password";
+        document.getElementById("hide_pass").title = "Show Password";
+        document.getElementById("hide_pass").classList.remove('fa-eye');
+        document.getElementById("hide_pass").classList.add('fa-eye-slash');
+    }
+}
+
 function enterEditPage(obj){
 	var documentData = ` <!DOCTYPE html>
 						<html style="scrollbar-width: none;">
@@ -200,48 +219,60 @@ function enterEditPage(obj){
 								<link rel="stylesheet" href="fontawesome/css/all.css"/>
 								<script src="bootstrap/js/bootstrap.js"></script>
 								<style>
-									a {
-										color: inherit;
-									}
-									.fas {
-										color: rgb(133, 135, 136);
-									}
-									.fas:hover {
-										color: rgb(43, 43, 43);
-									}
-									.input-icons i {
-										position: absolute;
-										margin-left: 10px;
-										align-self: center;
-									}
-									  
-									.input-icons {
-										width: 100%;
-										display: flex;
-										margin-right: 10px;
-									}
-									  
-									.icon {
-										padding: 10px;
-										min-width: 40px;
-									}
-									  
-									.input-field {
-										width: 100%;
-										padding: 10px;
-										padding-left: 30px;
-									}
-									#url {
-										background-color: #fff;
-									}
-									.form-group {
-										margin-bottom: 10px;
-									}
+                                    a {
+                                        color: inherit;
+                                    }
+                        
+                                    .fas {
+                                        color: rgb(133, 135, 136);
+                                    }
+                        
+                                    .fas:hover {
+                                        color: rgb(43, 43, 43);
+                                    }
+                        
+                                    .input-icons i {
+                                        position: absolute;
+                                        margin-left: 10px;
+                                        align-self: center;
+                                    }
+                                    
+                                    .input-icons {
+                                        width: 100%;
+                                        display: flex;
+                                        margin-right: 10px;
+                                        position: relative;
+                                    }
+                                    
+                                    .icon {
+                                        padding: 10px;
+                                        min-width: 40px;
+                                    }
+                                    
+                                    .input-field {
+                                        width: 100%;
+                                        padding: 10px;
+                                        padding-left: 30px;
+                                    }
+                        
+                                    #url {
+                                        background-color: #fff;
+                                    }
+                        
+                                    .form-group {
+                                        margin-bottom: 10px;
+                                    }
+                        
+                                    #hide_pass {
+                                        margin-right: 15px;
+                                        right: 0;
+                                    }
 								</style>
 							</head>
 							<body class="p-3" style="overflow-x: hidden; background-color: #ebebeb;">
-								<div class="container position-relative d-flex justify-content-center align-items-center" style="min-width: 480px; min-height: 550px; width: 100%">
-									<form action="" style="min-width: 400px;">
+								<div class="container position-relative d-flex justify-content-center align-items-center flex-column" style="min-width: 450px; max-width: 450px; min-height: 550px; width: 100%">
+									<h2>Edit</h2>
+                                    <form action="" style="min-width: 400px;">
 										<div class="form-group">
 											<label for="url">Active URL</label>
 											<input type="text" value="${obj.domain}" class="form-control" id="url" aria-describedby="url" readonly>
@@ -256,7 +287,10 @@ function enterEditPage(obj){
 										  </div>
 										<div class="form-group">
 										  <label for="password">Password</label>
-										  <input type="password" autocomplete="off" value="${obj.password}" class="form-control" id="password" placeholder="Password">
+										  <div class="input-icons">
+                                          <input type="password" autocomplete="off" value="${obj.password}" class="form-control" id="password" placeholder="Password">
+                                            <i class="fas fa-eye-slash" id="hide_pass" title="Show Password"></i>
+                                        </div>
 										</div>
 										
 										<div class="row">
@@ -274,6 +308,7 @@ function enterEditPage(obj){
 	newHtml.close();
     setTimeout(function(){
         document.getElementById("updateBtn").disabled = false;
+        document.getElementById("hide_pass").addEventListener("click", showHide);
         document.getElementById("updateBtn").addEventListener('click', function(){
             edit(obj.key);
             console.log("UPDATED!!!!");

@@ -12,6 +12,13 @@
                 color: inherit;
             }
 
+            .detail {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 400px;
+            }
+
             .fas:not(.fa-globe-americas, .fa-search) {
                 color: rgb(133, 135, 136);
             }
@@ -30,6 +37,7 @@
                 width: 100%;
                 display: flex;
                 margin-right: 10px;
+                position: relative;
             }
               
             .icon {
@@ -48,12 +56,17 @@
                 transition: ease;
                 cursor: pointer;
             }
+
+            #hide_pass {
+                margin-right: 15px;
+                right: 0;
+            }
         </style>
     </head>
 
     <body class="p-3" style="overflow-x: hidden; background-color: #ebebeb;">
-        <div class="container position-relative" style="min-width: 480px; min-height: 550px; width: 100%">
-            <div class="row">
+        <div class="container position-relative" style="min-width: 450px; max-width: 450px; min-height: 550px;">
+            <div class="row sticky-top" style="top: 15px;">
                 <div class="col-12 d-flex justify-content-center">
                     <div class="input-icons">
                         <i class="fas fa-search"></i>

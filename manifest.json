@@ -7,7 +7,7 @@
     "description": "Adds a browser action icon to the toolbar. Click the button to choose a beast. The active tab's body content is then replaced with a picture of the chosen beast. See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Examples#beastify",
     "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/beastify",
     "icons": {
-      "48": "icons/guard_cropped.png"
+      "48": "icons/guardx48.png"
     },
   
     "permissions": [
@@ -17,7 +17,7 @@
     ],
   
     "browser_action": {
-      "default_icon": "icons/guard_cropped.png",
+      "default_icon": "icons/guardx48.png",
       "default_title": "Password Manager",
       "default_popup": "popup/guard.html"
     }
