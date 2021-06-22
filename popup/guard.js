@@ -42,7 +42,7 @@ function add(){
                 console.log(arr[arr.length - 1]);
     let lastIndex = arr.length - 1;
     map.set(arr[lastIndex].key, arr[lastIndex]);
-    browser.storage.local.set({items: arr}).then(success, onError);
+    browser.storage.sync.set({items: arr}).then(success, onError);
 }
 
 function success(){
@@ -55,7 +55,7 @@ function onError(error){
 
 function readFromStore(){
     console.log("reading from store");
-    var itemList = browser.storage.local.get('items').then(function(result){
+    var itemList = browser.storage.sync.get('items').then(function(result){
         if(result.items === undefined){
             map.clear();
             return;
@@ -78,7 +78,7 @@ function del(key){
     map.forEach(element => {
         arr.push(element);
     });
-    browser.storage.local.clear().then(function(){browser.storage.local.set({items: arr});}, onError);
+    browser.storage.sync.clear().then(function(){browser.storage.sync.set({items: arr});}, onError);
 }
 
 function clipboardPassword(key){
@@ -332,7 +332,7 @@ function edit(key){
     map.forEach(element => { //Re-add all the data from the hashmap into the array
         arr.push(element);
     });
-    browser.storage.local.clear().then(function(){browser.storage.local.set({items: arr});}, onError); //Clear and re-add latest array data into local storage
+    browser.storage.sync.clear().then(function(){browser.storage.sync.set({items: arr});}, onError); //Clear and re-add latest array data into sync storage
     document.getElementById('successText').setAttribute("style", "display: block; margin: 15px;");
     setTimeout(function(){document.getElementById('successText').setAttribute("style", "display: none");}, 3000);
 }

@@ -1,11 +1,11 @@
 {
 
     "manifest_version": 2,
-    "name": "Password Manager - By Gbox",
+    "name": "Password Guard",
     "version": "1.0",
   
-    "description": "Adds a browser action icon to the toolbar. Click the button to choose a beast. The active tab's body content is then replaced with a picture of the chosen beast. See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Examples#beastify",
-    "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/beastify",
+    "description": "A simple extension that store your username and password privately in your account.",
+    "homepage_url": "https://github.com/leong34/PassGuard",
     "icons": {
       "48": "icons/guardx48.png"
     },
@@ -18,7 +18,7 @@
   
     "browser_action": {
       "default_icon": "icons/guardx48.png",
-      "default_title": "Password Manager",
+      "default_title": "Password Guard",
       "default_popup": "popup/guard.html"
     }
   
